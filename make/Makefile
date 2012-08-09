@@ -68,6 +68,18 @@
 # DEFINITIONS
 # ============================================================
 
+#######################################################################
+# Determine the number cores of the machine, where the makefile is executed.
+# This helps to set the -j option (from make), to speedup the build
+# process of 'large' projects.  
+NPROCS=1
+OS:=$(shell uname -s)
+ifeq ($(OS),Linux)
+    NPROCS:=$(shell grep -c ^processor /proc/cpuinfo) 
+endif
+#######################################################################
+
+
 BIN_DIR 	= ../bin
 OBJ_DIR 	= ../obj
 SRC_DIR 	= ../src
@@ -113,7 +125,7 @@ CSRCS =
 # ===========================================================
 build: mrproper depend 
 	# after generating the dependencies it is necessary to call make again
-	make all 
+	make -j$(NPROCS) all 
 
 rpc:
 	#not implemented
