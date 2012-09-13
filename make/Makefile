@@ -85,34 +85,34 @@ OBJ_DIR 	= ../obj
 SRC_DIR 	= ../src
 SRC_EXT_DIR 	= ../srcext
 RPC_DIR 	= ../rpc
-
+GNUPLOT_CPP 	= $(SRC_EXT_DIR)/gnuplot-cpp/gnuplot-cpp/
 
 CPPCOMPILER 		= g++
-CPP_INCLUDE_HEADER 	= 
-CPPCOMPILER_FLAGS 	= -O2 -W -Wall -Wunused -Wextra -ansi -pedantic -Wno-write-strings -fno-strict-aliasing
-CPPCOMPILER_CALL 	= $(CPPCOMPILER) -c $(CPP_INCLUDE_HEADER) $(CPPCOMPILER_FLAGS) -o $@ $< 
+CPP_INCLUDE_HEADER 	= -I$(GNUPLOT_CPP)
+CPPCOMPILER_FLAGS 	= -O2 -W -Wall -Wunused -Wextra -ansi -pedantic -Wno-write-strings -fno-strict-aliasing $(CPP_INCLUDE_HEADER)
+CPPCOMPILER_CALL 	= $(CPPCOMPILER) -c  $(CPPCOMPILER_FLAGS) -o $@ $< 
 
 CCOMPILER 		= gcc
 CCOMPILER_FLAGS 	= -O2 -W -Wall -Wunused -Wextra -ansi -pedantic   
 CCOMPILER_CALL  	= $(CCOMPILER) -c $(CCOMPILER_FLAGS) -o $@ $< 
 
-LINKER = $(CPPCOMPILER) 
-LINKER_FLAGS = 
-LINKER_CALL = $(LINKER) -o $@ $^ $(LINKER_FLAGS)
+LINKER 			= $(CPPCOMPILER) 
+LINKER_FLAGS 		= 
+LINKER_CALL 		= $(LINKER) -o $@ $^ $(LINKER_FLAGS)
 
 
-all: $(BIN_DIR)/test
+all: $(BIN_DIR)/barnsley_fern
 
 # ============================================================
 # LINKER-RULES
 # ===========================================================
-$(BIN_DIR)/test : $(OBJ_DIR)/application.o
+$(BIN_DIR)/barnsley_fern : $(OBJ_DIR)/barnsley_fern.o
 	$(LINKER_CALL)
 # 
 # ===========================================================
 # c++ - SOURCES
 # ===========================================================
-SRCS = $(SRC_DIR)/application.cpp
+SRCS = $(SRC_DIR)/barnsley_fern.cpp
 
 
 # ===========================================================
