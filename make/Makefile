@@ -85,6 +85,7 @@ OBJ_DIR 	= ../obj
 SRC_DIR 	= ../src
 SRC_EXT_DIR 	= ../srcext
 RPC_DIR 	= ../rpc
+APP_NAME	= barnsley_fern
 GNUPLOT_CPP 	= $(SRC_EXT_DIR)/gnuplot-cpp/gnuplot-cpp/
 
 CXX 			= g++
@@ -101,18 +102,18 @@ LINKER_FLAGS 		=
 LINKER_CALL 		= $(LINKER) -o $@ $^ $(LINKER_FLAGS)
 
 
-all: $(BIN_DIR)/barnsley_fern
+all: $(BIN_DIR)/$(APP_NAME)
 
 # ============================================================
 # LINKER-RULES
 # ===========================================================
-$(BIN_DIR)/barnsley_fern : $(OBJ_DIR)/barnsley_fern.o
+$(BIN_DIR)/$(APP_NAME) : $(OBJ_DIR)/$(APP_NAME).o
 	$(LINKER_CALL)
 # 
 # ===========================================================
 # c++ - SOURCES
 # ===========================================================
-SRCS = $(SRC_DIR)/barnsley_fern.cpp
+SRCS = $(SRC_DIR)/$(APP_NAME).cpp
 
 
 # ===========================================================
