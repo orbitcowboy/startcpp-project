@@ -3,6 +3,7 @@ compiler:
   - gcc
   - clang
 script:
+  - cd make
   - make build
 branches:
   only:
