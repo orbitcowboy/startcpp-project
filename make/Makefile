@@ -87,16 +87,16 @@ SRC_EXT_DIR 	= ../srcext
 RPC_DIR 	= ../rpc
 GNUPLOT_CPP 	= $(SRC_EXT_DIR)/gnuplot-cpp/gnuplot-cpp/
 
-CPPCOMPILER 		= g++
+CXX 			= g++
 CPP_INCLUDE_HEADER 	= -I$(GNUPLOT_CPP)
 CPPCOMPILER_FLAGS 	= -O2 -W -Wall -Wunused -Wextra -ansi -pedantic -Wno-write-strings -fno-strict-aliasing $(CPP_INCLUDE_HEADER)
-CPPCOMPILER_CALL 	= $(CPPCOMPILER) -c  $(CPPCOMPILER_FLAGS) -o $@ $< 
+CPPCOMPILER_CALL 	= $(CXX) -c  $(CPPCOMPILER_FLAGS) -o $@ $< 
 
-CCOMPILER 		= gcc
+CC 			= gcc
 CCOMPILER_FLAGS 	= -O2 -W -Wall -Wunused -Wextra -ansi -pedantic   
-CCOMPILER_CALL  	= $(CCOMPILER) -c $(CCOMPILER_FLAGS) -o $@ $< 
+CCOMPILER_CALL  	= $(CC) -c $(CCOMPILER_FLAGS) -o $@ $< 
 
-LINKER 			= $(CPPCOMPILER) 
+LINKER 			= $(CXX) 
 LINKER_FLAGS 		= 
 LINKER_CALL 		= $(LINKER) -o $@ $^ $(LINKER_FLAGS)
 
@@ -158,7 +158,7 @@ depend:
 	@cat < /dev/null > cmakedep
 # First C++
 	@for i in ${SRCS}; do \
-		 (echo $$i; $(CPPCOMPILER) $(CPPCOMPILER_FLAGS) -MM $$i >> makedep); done
+		 (echo $$i; $(CXX) $(CPPCOMPILER_FLAGS) -MM $$i >> makedep); done
 #       Write full path information before each *.o-dependency
 	@echo 's/.*\.o:/..\/obj\/&/g' > eddep
 	@sed -f eddep makedep > makedep1
@@ -177,7 +177,7 @@ depend:
 	@rm eddep
 # Then C
 	@for i in ${CSRCS}; do \
-		 (echo $$i; $(CCOMPILER) $(CCOMPILER_FLAGS) -MM $$i >> cmakedep); done
+		 (echo $$i; $(CC) $(CCOMPILER_FLAGS) -MM $$i >> cmakedep); done
 #       Write full path information before each *.o-dependency
 	@echo 's/.*\.o:/..\/obj\/&/g' > ceddep
 	@sed -f ceddep cmakedep > cmakedep1

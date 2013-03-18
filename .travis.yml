@@ -1,0 +1,15 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+script:
+  - make build
+branches:
+  only:
+    - master
+notifications:
+recipients:
+    - ettl.martin78@googlemail.com
+  email:
+    on_success: change
+    on_failure: always
